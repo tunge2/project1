@@ -138,11 +138,32 @@ end
 % combine motion
 t=[t1 t2(2:NT2)];
 pt=[pt1 pt2(:,2:NT2)];
+% generate lambda
+lambda=linspace(0,l(end),length(pt));
 % calculate path length
 lt=[0 cumsum(vecnorm(diff(pt')'))];
+% omega via lambda
+bigtheta = linspace(theta0, theta1, length(pt));
+
 % motion vs. time 
-figure(11);plot(t,pt,'linewidth',2);legend('x','y');
-xlabel('time (sec)');xlabel('robot position (m)');
+
+figure(11);
+
+yyaxis left
+plot(lambda,pt,'linewidth',2);
+ylabel('position (m)')
+hold on
+
+yyaxis right
+plot(lambda,bigtheta,'linewidth',2);
+ylabel('angle (rad)')
+
+grid on
+xlabel('lambda (m)');
+legend('x','y','theta','location','best');
+title('robot position and orientation')
+
+
 % lambda vs. time (piecewise linear, with a kink at transition)
 figure(12);plot(t,lt,'linewidth',2);
 xlabel('time (sec)');xlabel('path length (lambda) (m)');
@@ -399,25 +420,6 @@ title('robot motion based on tracking control');
 figure(65);plot(tfbka(1:end-1),ufbka,'linewidth',2);legend('u_x','u_y');
 xlabel('time (sec)');xlabel('robot position (m)');
 title('robot velocity for tracking control')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 %
 % show room 
