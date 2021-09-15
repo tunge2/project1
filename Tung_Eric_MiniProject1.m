@@ -180,11 +180,11 @@ lsdotmax=min(min(abs(umax./ps_prime)')');
 % to account for all constaints (using constant 
 % rotational/positional speeds)
 
-max_velocity_from_w = abs(lt(end)/((norm(theta1-theta0))/wmax));
+max_velocity_from_wmax = abs(lt(end)/((norm(theta1-theta0))/wmax));
 
 % use a single constant velocity for the entire path 
 
-ldotmax=min([l1dotmax l2dotmax lsdotmax max_velocity_from_w]);
+ldotmax=min([l1dotmax l2dotmax lsdotmax max_velocity_from_wmax]);
 % calculate the time needed to travel the complete path
 total_time=l4(end)/ldotmax; % faster because the path length is shorter
 
